@@ -11,8 +11,13 @@ db_password = os.getenv("postgres")
 db_name = os.getenv("josedrosales")
 
 database_url = f"postgresql://{db_user}:{db_password}@{db_host}/{db_name}"
-
-
+engine = create_engine(database_url).execution_options(autocommit=True)
+try:
+    connection = engine.connect()
+    print("Connected to the database!")
+    
+except Exception as e:
+    print(f"Error: {e}")
 
 # 2) Execute the SQL sentences to create your tables using the SQLAlchemy's execute function
 
